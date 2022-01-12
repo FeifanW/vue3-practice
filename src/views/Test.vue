@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld @clickBtn="test" msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
+  <button @click="clickButton"></button>
 </template>
 
 <script>
@@ -15,8 +16,8 @@ export default {
     HelloWorld
   },
   methods:{
-    test(){
-      console.log("传值成功了！")
+    clickButton(){
+      this.$emit("clickBtn")
     }
   }
 }
