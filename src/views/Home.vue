@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld @clickBtn="test" msg="Welcome to Your Vue.js App"/>
+    <HelloWorld ref="hello" msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
     test(){
       console.log("传值成功了！")
     }
+  },
+  onMounted(){
+    this.$refs.hello.$on('clickBtn',test)
   }
 }
 </script>
