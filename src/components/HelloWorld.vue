@@ -34,19 +34,20 @@
 </template>
 
 <script>
-import {h} from 'vue'
+import {reactive} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
   setup(){
     let num = ref(10)
-    let obj = ref({
+    let obj = reactive({
       name:'第一名'
     })
     // 数据
     function btn(){
-      num.value = 13
-      obj.value.name = '第二名'
+      // num.value = 13
+      // obj.value.name = '第二名'
+      obj.name = '第si名'
       console.log("点击了测试按钮")
     }
     return{
