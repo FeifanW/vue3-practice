@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import {h} from 'vue'
 export default {
   name: 'HelloWorld',
   // props: {
@@ -48,9 +49,10 @@ export default {
     function btn(){
       console.log("点击了测试按钮")
     }
-    return{
-      btn
-    }
+    // return{
+    //   btn
+    // }
+    return ()=> h('h1','测试渲染')
   }
 }
 </script>
