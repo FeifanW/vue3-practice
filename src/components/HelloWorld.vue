@@ -35,12 +35,21 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  methods:{
-    btn(){
-      this.$emit("clickBtn")
+  // props: {
+  //   msg: String
+  // },
+  // methods:{
+  //   btn(){
+  //     console.log("点击了")
+  //   }
+  // }
+  setup(){
+    // 数据
+    function btn(){
+      console.log("点击了测试按钮")
+    }
+    return{
+      btn
     }
   }
 }
