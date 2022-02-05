@@ -28,31 +28,33 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <div>显示数字{{obj.name}}</div>
     <button @click="btn">测试按钮</button>
   </div>
 </template>
 
 <script>
 import {h} from 'vue'
+import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
-  // props: {
-  //   msg: String
-  // },
-  // methods:{
-  //   btn(){
-  //     console.log("点击了")
-  //   }
-  // }
   setup(){
+    let num = ref(10)
+    let obj = ref({
+      name:'第一名'
+    })
     // 数据
     function btn(){
+      num.value = 13
+      obj.value.name = '第二名'
       console.log("点击了测试按钮")
     }
-    // return{
-    //   btn
-    // }
-    return ()=> h('h1','测试渲染')
+    return{
+      num,
+      obj,
+      btn
+    }
+    // return ()=> h('h1','测试渲染')
   }
 }
 </script>
