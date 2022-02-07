@@ -31,11 +31,14 @@
     <div>显示数字{{obj.name}}</div>
     <slot></slot>
     <button @click="btn">测试按钮</button>
+    <input type="text" v-model="obj.firstName">
+    <input type="text" v-model="obj.lastName">
+    <span>全名：{{obj.fullName}}</span>
   </div>
 </template>
 
 <script>
-import {reactive} from 'vue'
+import {reactive,computed} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
@@ -53,8 +56,15 @@ export default {
     //#endregion
 
     let obj = reactive({
-      name:'第一名'
+      name:'第一名',
+      firstName:'',
+      lastName:'',
+      fullName:'',
     })
+    obj.fullName = computed(()=>{
+        return obj.firstName+obj.lastName
+      }
+    )
 
     const p = new Proxy(obj,{
       get(target,prop){
