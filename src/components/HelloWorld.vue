@@ -29,6 +29,7 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
     <div>显示数字{{obj.name}}</div>
+    <slot></slot>
     <button @click="btn">测试按钮</button>
   </div>
 </template>
@@ -38,17 +39,39 @@ import {reactive} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
-  setup(){
+  props:['msg'],
+  emits:['hello'],
+  beforeCreate(){
+    console.log("beforeCreate")
+  },
+  setup(props,content){
+    console.log("打印this",props)
+    console.log("上下文环境",content.slots)
+    // #region
     let num = ref(10)
+    let numa = ref(10)
+    //#endregion
+
     let obj = reactive({
       name:'第一名'
     })
+
+    const p = new Proxy(obj,{
+      get(target,prop){
+        console.log("读取属性了")
+      },
+      set(target,prop){
+        console.log("修改属性了")
+      },
+    })
+
     // 数据
     function btn(){
       // num.value = 13
       // obj.value.name = '第二名'
       obj.name = '第si名'
       console.log("点击了测试按钮")
+      content.emit('hello')
     }
     return{
       num,
