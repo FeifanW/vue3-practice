@@ -34,11 +34,12 @@
     <input type="text" v-model="obj.firstName">
     <input type="text" v-model="obj.lastName">
     <span>全名：{{obj.fullName}}</span>
+    <span>薪水：{{detail.salary}}</span>
   </div>
 </template>
 
 <script>
-import {reactive,computed} from 'vue'
+import {reactive,computed, toRef, toRefs} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
@@ -60,11 +61,16 @@ export default {
       firstName:'',
       lastName:'',
       fullName:'',
+      detail:{
+        salary:30
+      }
     })
     obj.fullName = computed(()=>{
         return obj.firstName+obj.lastName
       }
     )
+
+    // const salary = toRef(obj,'salary')
 
     const p = new Proxy(obj,{
       get(target,prop){
@@ -82,11 +88,14 @@ export default {
       obj.name = '第si名'
       console.log("点击了测试按钮")
       content.emit('hello')
+      obj.detail.salary++
     }
     return{
       num,
       obj,
-      btn
+      btn,
+      salary:toRef(obj.detail,'salary'),
+      ...toRefs(obj)
     }
     // return ()=> h('h1','测试渲染')
   }
