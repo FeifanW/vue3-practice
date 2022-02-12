@@ -34,12 +34,14 @@
     <input type="text" v-model="obj.firstName">
     <input type="text" v-model="obj.lastName">
     <span>全名：{{obj.fullName}}</span>
-    <span>薪水：{{detail.salary}}</span>
+    <!-- <span>薪水：{{detail.salary}}</span> -->
+    <!-- <span>薪水：{{obj2.salary}}</span> -->
+    <span>薪水：{{salary}}</span>
   </div>
 </template>
 
 <script>
-import {reactive,computed, toRef, toRefs} from 'vue'
+import {reactive,computed, toRef, toRefs,shallowReactive,shallowRef} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
@@ -56,7 +58,8 @@ export default {
     let numa = ref(10)
     //#endregion
 
-    let obj = reactive({
+    let obj = reactive({   
+    // let obj = shallowReactive({  
       name:'第一名',
       firstName:'',
       lastName:'',
@@ -64,6 +67,11 @@ export default {
       detail:{
         salary:30
       }
+    })
+    
+    let obj2 = shallowRef({
+    // let obj2 = ref({
+      salary:20
     })
     obj.fullName = computed(()=>{
         return obj.firstName+obj.lastName
@@ -88,14 +96,16 @@ export default {
       obj.name = '第si名'
       console.log("点击了测试按钮")
       content.emit('hello')
-      obj.detail.salary++
+      // obj.detail.salary++
+      obj2.value.salary ++
     }
     return{
       num,
+      obj2,
       obj,
       btn,
-      salary:toRef(obj.detail,'salary'),
-      ...toRefs(obj)
+      salary:toRef(obj2.value,'salary'),
+      // ...toRefs(obj)
     }
     // return ()=> h('h1','测试渲染')
   }
