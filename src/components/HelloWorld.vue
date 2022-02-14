@@ -36,12 +36,12 @@
     <span>全名：{{obj.fullName}}</span>
     <!-- <span>薪水：{{detail.salary}}</span> -->
     <!-- <span>薪水：{{obj2.salary}}</span> -->
-    <span>薪水：{{salary}}</span>
+    <span>薪水：{{obj2.salary}}</span>
   </div>
 </template>
 
 <script>
-import {reactive,computed, toRef, toRefs,shallowReactive,shallowRef} from 'vue'
+import {reactive,computed, toRef, toRefs,shallowReactive,shallowRef, readonly, shallowReadonly} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
@@ -69,10 +69,12 @@ export default {
       }
     })
     
-    let obj2 = shallowRef({
+    let obj2 = ref({
     // let obj2 = ref({
       salary:20
     })
+    // obj2 = readonly(obj2)
+    obj2 = shallowReadonly(obj2)
     obj.fullName = computed(()=>{
         return obj.firstName+obj.lastName
       }
@@ -93,18 +95,20 @@ export default {
     function btn(){
       // num.value = 13
       // obj.value.name = '第二名'
-      obj.name = '第si名'
-      console.log("点击了测试按钮")
-      content.emit('hello')
+      // obj.name = '第si名'
+      // console.log("点击了测试按钮")
+      // content.emit('hello')
       // obj.detail.salary++
+      console.log("obj2", obj2)
       obj2.value.salary ++
+      // salary++
     }
     return{
       num,
       obj2,
       obj,
       btn,
-      salary:toRef(obj2.value,'salary'),
+      // salary:toRef(obj2.value,'salary'),
       // ...toRefs(obj)
     }
     // return ()=> h('h1','测试渲染')
