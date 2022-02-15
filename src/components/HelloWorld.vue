@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import {reactive,computed, toRef, toRefs,shallowReactive,shallowRef, readonly, shallowReadonly} from 'vue'
+import {reactive,computed, toRef, toRaw, 
+        toRefs,shallowReactive,shallowRef, readonly, shallowReadonly} from 'vue'
 import {ref} from 'vue'
 export default {
   name: 'HelloWorld',
