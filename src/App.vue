@@ -5,7 +5,25 @@
   <!-- </div> -->
   <router-view/>
 </template>
-
+<script>
+import {reactive, provide} from 'vue'
+export default {
+  name: 'App',
+  components: {
+    
+  },
+    setup(props,content){
+      let x = reactive({
+        name:'蟹老板',
+        age:'20'
+      })
+      provide('provide',x)
+    return{
+      x
+    }
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

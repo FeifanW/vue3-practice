@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {reactive,computed, toRef, toRaw, markRaw, customRef,
+import {reactive,computed, toRef, toRaw, markRaw, customRef, inject,
         toRefs,shallowReactive,shallowRef, readonly, shallowReadonly} from 'vue'
 import {ref} from 'vue'
 export default {
@@ -40,6 +40,8 @@ export default {
     // })
     let salary = deal(10)
 
+    let x = inject('provide') 
+    console.log("后代组件收到信息了",x)
     // const info = {age:10};
     // obj.info = markRaw(info)       
     // console.log("obj", obj)
