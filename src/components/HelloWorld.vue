@@ -8,7 +8,11 @@
     <input type="text" v-model="obj.lastName"> -->
     <!-- <span>全名：{{obj.fullName}}</span> -->
     <!-- <span>薪水：{{obj.detail.salary}}</span> -->
-    <input v-model="salary">
+    <!-- <input v-model="salary"> -->
+    <teleport to='body'>
+      <!-- <div>123456测试</div> -->
+      <div v-if="testDialog">123456测试</div>
+    </teleport>
   </div>
 </template>
 
@@ -25,68 +29,22 @@ export default {
     console.log("beforeCreate")
   },
   setup(props,content){
-
-    let num = ref(10)
-    let car = reactive({ price:10})
-    let car2 = readonly(car)
-
-    console.log("isRef",isRef(num))
-    console.log("isReactive",isReactive(car))
-    console.log("isReadonly",isReadonly(car2))
-    console.log("isProxy",isProxy(car2))
-    // let obj = reactive({   
-    // let obj = deal({   
-    // // let obj = shallowReactive({  
-    //   name:'第一名',
-    //   firstName:'',
-    //   lastName:'',
-    //   fullName:'',
-    //   detail:{
-    //     salary:30
-    //   }
-    // })
-    let salary = deal(10)
-
-    let x = inject('provide') 
-    console.log("后代组件收到信息了",x)
-    // const info = {age:10};
-    // obj.info = markRaw(info)       
-    // console.log("obj", obj)
-
-    function deal(value){
-      return customRef((track, trigger)=>{
-        return {
-          get(){
-            console.log("有人从自定义deal里读数据了")
-            track()
-            return value
-          },
-          set(newValue){
-            console.log("有人改数据了",newValue)
-            value = newValue   // 重新赋值
-            trigger()
-          }
-        }
-      })
-    }
+    let testDialog = ref(false)
 
     // 数据
     function btn(){
-      salary++
-      // obj.info.age ++
-      // console.log("age", obj.info.age)
+      // salary++
+      this.testDialog = true
+      console.log("测试",testDialog)
     }
-    // function add(){
-      // const info = {age:10};
-      // obj.info = markRaw(info)       
-      // console.log("obj", obj)
-    // }
+
     return{
-      num,
+      // num,
+      testDialog,
       // add,
       // obj,
       btn,
-      salary
+      // salary
     }
   }
 }
