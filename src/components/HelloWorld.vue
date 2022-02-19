@@ -14,6 +14,7 @@
 
 <script>
 import {reactive,computed, toRef, toRaw, markRaw, customRef, inject,
+        isRef,isReactive,isReadonly,isProxy,
         toRefs,shallowReactive,shallowRef, readonly, shallowReadonly} from 'vue'
 import {ref} from 'vue'
 export default {
@@ -26,7 +27,13 @@ export default {
   setup(props,content){
 
     let num = ref(10)
+    let car = reactive({ price:10})
+    let car2 = readonly(car)
 
+    console.log("isRef",isRef(num))
+    console.log("isReactive",isReactive(car))
+    console.log("isReadonly",isReadonly(car2))
+    console.log("isProxy",isProxy(car2))
     // let obj = reactive({   
     // let obj = deal({   
     // // let obj = shallowReactive({  
