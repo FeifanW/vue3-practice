@@ -28,7 +28,7 @@ export default {
   beforeCreate(){
     console.log("beforeCreate")
   },
-  setup(props,content){
+  async setup(props,content){
     let testDialog = ref(false)
 
     // 数据
@@ -38,14 +38,21 @@ export default {
       console.log("测试",testDialog)
     }
 
-    return{
-      // num,
-      testDialog,
-      // add,
-      // obj,
-      btn,
-      // salary
-    }
+    let p = new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve({testDialog, btn})
+      },3000)
+    })
+
+    return await p
+    // return{
+    //   // num,
+    //   testDialog,
+    //   // add,
+    //   // obj,
+    //   btn,
+    //   // salary
+    // }
   }
 }
 </script>
